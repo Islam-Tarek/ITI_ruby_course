@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Lab 4 Last Try" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+  </head>
+
+  <body class="bg-gray-100 min-h-screen">
+    <nav class="bg-indigo-600 shadow-lg fixed w-full top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex-shrink-0 flex items-center">
+            <%= link_to "MyApp", root_path, class: "text-xl font-bold text-white hover:text-indigo-200 transition duration-150" %>
+          </div>
+          <div class="flex items-center space-x-4">
+            <% if user_signed_in? %>
+              <span class="text-indigo-100"><%= current_user.email %></span>
+              <%= button_to "Sign out", 
+                  destroy_user_session_path, 
+                  method: :delete, 
+                  class: "bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-150 shadow hover:shadow-lg" %>
+            <% else %>
+              <%= link_to "Sign in", 
+                  new_user_session_path, 
+                  class: "text-white hover:text-indigo-200 transition duration-150" %>
+              <%= link_to "Sign up", 
+                  new_user_registration_path, 
+                  class: "bg-white text-indigo-600 hover:bg-indigo-100 font-semibold py-2 px-4 rounded-lg transition duration-150 shadow hover:shadow-lg" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="pt-16"> <!-- Add padding for fixed navbar -->
+      <% if notice %>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+          <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded shadow-sm" role="alert">
+            <p class="font-medium"><%= notice %></p>
+          </div>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+          <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-sm" role="alert">
+            <p class="font-medium"><%= alert %></p>
+          </div>
+        </div>
+      <% end %>
+
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>

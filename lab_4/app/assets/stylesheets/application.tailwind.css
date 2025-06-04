@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply font-semibold py-2 px-4 rounded-lg transition duration-150 shadow hover:shadow-lg;
+  }
+
+  .btn-primary {
+    @apply btn bg-indigo-600 text-white hover:bg-indigo-700;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-200 text-gray-700 hover:bg-gray-300;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-500 text-white hover:bg-red-600;
+  }
+
+  .btn-success {
+    @apply btn bg-green-500 text-white hover:bg-green-600;
+  }
+
+  .btn-link {
+    @apply btn bg-transparent text-indigo-600 hover:text-indigo-700 shadow-none hover:shadow-none;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-150;
+  }
+}

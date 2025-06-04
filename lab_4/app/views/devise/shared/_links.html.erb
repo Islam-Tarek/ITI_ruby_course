@@ -1,0 +1,42 @@
+<nav class="flex items-center justify-between bg-white shadow px-6 py-4 rounded mb-8">
+  <div class="font-bold text-xl text-blue-700">MyApp</div>
+  <ul class="flex items-center gap-4">
+    <% if controller_name != 'sessions' %>
+      <li>
+        <%= link_to "Log in", new_session_path(resource_name), class: "text-blue-600 hover:underline" %>
+      </li>
+    <% end %>
+    <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <li>
+        <%= link_to "Sign up", new_registration_path(resource_name), class: "text-blue-600 hover:underline" %>
+      </li>
+    <% end %>
+    <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+      <li>
+        <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-blue-600 hover:underline" %>
+      </li>
+    <% end %>
+    <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+      <li>
+        <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "text-blue-600 hover:underline" %>
+      </li>
+    <% end %>
+    <% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+      <li>
+        <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name), class: "text-blue-600 hover:underline" %>
+      </li>
+    <% end %>
+    <% if devise_mapping.omniauthable? %>
+      <% resource_class.omniauth_providers.each do |provider| %>
+        <li>
+          <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200" %>
+        </li>
+      <% end %>
+    <% end %>
+    <% if user_signed_in? %>
+      <li>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200" %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
